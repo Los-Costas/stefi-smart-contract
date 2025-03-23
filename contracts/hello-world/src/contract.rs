@@ -51,7 +51,7 @@ impl Contract {
             Err(err) => return Err(err),
         };
 
-        if signer != asset.asset_provider.address {
+        if signer != asset.asset_provider {
             return Err(ContractError::SignerIsNotAssetProvider);
         }
         signer.require_auth();
@@ -66,7 +66,7 @@ impl Contract {
             return Err(ContractError::SignerHaveInsufficientBalance);
         }
 
-        usdc_token.transfer(&asset.asset_provider.address, &asset.client.address, &asset.monthly_fee);
+        usdc_token.transfer(&asset.asset_provider, &asset.client, &asset.monthly_fee);
 
         asset.grace_period_end = new_grace_period;
         e.storage().instance().set(&DataKey::Asset, &asset);
@@ -85,7 +85,7 @@ impl Contract {
             return Err(ContractError::AssetWithoutPurchaseOption);
         }
 
-        if signer != asset.asset_provider.address {
+        if signer != asset.asset_provider {
             return Err(ContractError::SignerIsNotAssetProvider);
         }
 
@@ -101,7 +101,7 @@ impl Contract {
             return Err(ContractError::SignerHaveInsufficientBalance);
         }
 
-        usdc_token.transfer(&asset.asset_provider.address, &asset.client.address, &asset.total);
+        usdc_token.transfer(&asset.asset_provider, &asset.client, &asset.total);
 
         Ok(())
     }
