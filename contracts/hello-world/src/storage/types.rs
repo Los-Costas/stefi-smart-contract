@@ -17,7 +17,7 @@ pub struct Asset {
     pub client: User,
     pub asset_provider: User,
     pub token: Address, 
-    pub monthly_payouts: Map<u64, i128>,
+    // pub monthly_payouts: Map<u64, i128>,
 }
 
 #[contracttype]

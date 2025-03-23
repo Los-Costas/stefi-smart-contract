@@ -37,6 +37,10 @@ impl Contract {
             return Err(ContractError::TotalCannotBeZero);
         }
 
+        e.storage()
+            .instance()
+            .set(&DataKey::Asset, &asset_properties);
+
         Ok(asset_properties)
     }
 
