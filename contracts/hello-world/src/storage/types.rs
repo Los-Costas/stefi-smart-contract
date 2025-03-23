@@ -1,4 +1,4 @@
-use soroban_sdk::{contracttype, Address, String, Map};
+use soroban_sdk::{contracttype, Address, String};
 
 pub(crate) const DAY_IN_LEDGERS: u32 = 17280;
 pub(crate) const INSTANCE_BUMP_AMOUNT: u32 = 7 * DAY_IN_LEDGERS;
@@ -14,17 +14,10 @@ pub struct Asset {
     pub deadline: u64,
     pub next_due_date: u64,
     pub grace_period_end: u64,
-    pub client: User,
-    pub asset_provider: User,
+    pub client: Address,
+    pub asset_provider: Address,
     pub token: Address, 
     // pub monthly_payouts: Map<u64, i128>,
-}
-
-#[contracttype]
-#[derive(Clone, Debug, PartialEq, Eq)]
-pub struct User {
-    pub name: String,
-    pub address: Address,
 }
 
 #[contracttype]
